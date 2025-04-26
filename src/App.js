@@ -1,24 +1,36 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React from "react";
+import ReactFullpage from "@fullpage/react-fullpage";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 
-function App() {
+export default function App() {
   return (
-    <Router>
+    <>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-      <Footer />
-    </Router>
+      <ReactFullpage
+        licenseKey={'OPEN-SOURCE-GPLV3-LICENSE'}
+        scrollingSpeed={1000}
+        navigation
+        render={() => (
+          <ReactFullpage.Wrapper>
+            <div className="section">
+              <Home />
+            </div>
+            <div className="section">
+              <About />
+            </div>
+            <div className="section">
+              <Projects />
+            </div>
+            <div className="section">
+              <Contact />
+            </div>
+          </ReactFullpage.Wrapper>
+        )}
+      />
+    </>
   );
 }
-
-export default App;

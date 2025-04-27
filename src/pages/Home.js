@@ -11,6 +11,7 @@ export default function Home() {
         backgroundRepeat: "no-repeat",
       }}
     >
+      {/* <div className="background-portfolio h-screen w-full"></div> */}
       <div className="flex justify-center md:justify-end w-full">
         <div className="bg-black/60 p-8 rounded-xl max-w-md text-right">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">

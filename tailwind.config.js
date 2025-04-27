@@ -6,6 +6,9 @@ module.exports = {
       fontFamily: {
         pixel: ['"Silkscreen", sans-serif'],
       },
+      screens: {
+        sm: '768px',
+      },
     },
   },
   plugins: [],

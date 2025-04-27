@@ -16,9 +16,21 @@ code {
     monospace;
 }
 
-/* .background-portfolio {
-  background-image: url('/background.webp');
+.background-default {
+  @apply h-screen w-full bg-no-repeat bg-fixed;
+  background-position: center bottom;
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-} */
+}
+
+.background-home {
+  @apply h-screen w-full bg-no-repeat bg-fixed;
+  background-position: center bottom;
+  background-size: cover;
+  background-image: url('/backgrounds/homeDesktop.webp');
+  
+@media (max-width: 768px) {
+    background-image: url('/backgrounds/homeMobil.webp');
+}
+}
+
+

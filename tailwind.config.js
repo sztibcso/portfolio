@@ -9,6 +9,18 @@ module.exports = {
       screens: {
         sm: '768px',
       },
+      perspective: {
+        '1000': '1000px',
+      },
+      transform: {
+        'preserve-3d': 'preserve-3d',
+      },
+      rotate: {
+        'y-180': 'rotateY(180deg)',
+      },
+      backface: {
+        'hidden': 'hidden',
+      },
     },
   },
   plugins: [],

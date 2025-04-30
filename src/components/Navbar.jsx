@@ -4,7 +4,6 @@ import { FaGithub, FaLinkedin, FaDev } from "react-icons/fa";
 export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 w-full z-50 p-4 bg-black/70 backdrop-blur-md text-white font-pixel flex items-center justify-between">
-      {/* Bal oldal - Logo */}
       <div className="flex items-center space-x-4">
         <img
           src="/images/stLogo.png"
@@ -13,7 +12,6 @@ export default function Navbar() {
         />
       </div>
 
-      {/* Közép - Menüpontok */}
       <div className="absolute left-1/2 transform -translate-x-1/2 flex space-x-10 text-lg">
         <a href="#home" className="hover:text-red-400 transition-colors duration-300">Home</a>
         <a href="#about" className="hover:text-red-400 transition-colors duration-300">About</a>
@@ -21,7 +19,6 @@ export default function Navbar() {
         <a href="#contact" className="hover:text-red-400 transition-colors duration-300">Contact</a>
       </div>
 
-      {/* Jobb oldal - Social ikonok */}
       <div className="flex space-x-4 text-2xl">
         <a href="https://github.com/sztibcso" target="_blank" rel="noopener noreferrer">
           <FaGithub className="hover:text-red-400 transition-colors duration-300" />

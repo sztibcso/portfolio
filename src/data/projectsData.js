@@ -11,7 +11,6 @@ const projectsData = [
       linkImage: "https://via.placeholder.com/50",
       linkUrl: "https://example.com/project2",
     },
-    // Adj hozzá annyi projektet, amennyit akarsz!
   ];
   
   export default projectsData;

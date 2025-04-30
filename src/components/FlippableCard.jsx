@@ -13,7 +13,7 @@ export default function FlippableCard({ frontImage, description, linkImage, link
           flipped ? "rotate-y-180" : ""
         }`}
       >
-        {/* Előlap */}
+        {/* Frontpage */}
         <div className="absolute w-full h-full backface-hidden">
           <img
             src={frontImage}
@@ -22,7 +22,7 @@ export default function FlippableCard({ frontImage, description, linkImage, link
           />
         </div>
 
-        {/* Hátlap */}
+        {/* Backpage */}
         <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-white rounded-lg border-2 border-black flex flex-col items-center justify-center p-4">
           <p className="text-center text-sm font-semibold mb-4 text-black">
             {description}

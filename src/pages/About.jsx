@@ -80,7 +80,7 @@ export default function About() {
               <li>
                 <strong>FLOWELL KFT – Project Engineer (2018 – 2019):</strong>
                 <br />
-                Managed industrial instrumentation projects, coordinated implementation processes, and maintained quality standards.
+                Managed industrial instrumentation projects, coordinated implementation processes, and maintained quality standards. 
               </li>
             </ul>
           </section>

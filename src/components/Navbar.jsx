@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaGithub, FaLinkedin, FaDev, FaBars, FaTimes } from "react-icons/fa";
 
-export default function Navbar({ onNavigate }) {
+export default function Navbar({ onNavigate, active }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [active, setActive] = useState(1);
 
   const handleNavigate = (section) => {
-    setActive(section);
     setMenuOpen(false);
     onNavigate(section);
   };

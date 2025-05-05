@@ -8,11 +8,11 @@ export default function About() {
         style={{ backgroundImage: "url('/backgrounds/icyDesktop.webp')" }}
       ></div>
 
-      <div className="relative z-10 flex flex-col md:flex-row w-full min-h-screen px-4 py-20 gap-8 bg-black/60 backdrop-blur-sm">
+      <div className="relative z-10 flex flex-col md:flex-row w-full min-h-screen px-4 py-20 gap-8 bg-black/75 backdrop-blur-sm">
 
         {/* Left side - fix block, with my photo and a little text */}
         <div className="md:w-1/3 w-full self-start flex flex-col items-center text-center md:sticky md:top-20">
-          <div className="w-60 h-60 relative mb-6 border-[4px] border-white shadow-[6px_6px_0_#000] rounded-full overflow-hidden bg-black">
+          <div className="w-80 h-80 relative mb-6 border-[4px] border-white shadow-[6px_6px_0_#000] rounded-full overflow-hidden bg-black">
             <img
               src="/images/profile.jpg"
               alt="Tibcsó"
@@ -22,19 +22,20 @@ export default function About() {
 
           <h2 className="text-3xl font-bold mb-4">Tibor Szalontai</h2>
 
-          <p className="mb-8 px-4">
-            After several years as a mechanical engineer, I decided to shift gears and pursue my passion for frontend development — a field where I can truly express my creative side through both code and design. I enjoy crafting user interfaces that are not only functional but visually engaging as well.
-            <br /><br />
-            I'm always eager to learn new things, adapt quickly, and thrive in agile environments. Colleagues often describe me as open-minded, a clear communicator, and someone who embraces challenges head-on.
-            <br /><br />
-            Whether it's experimenting with new technologies or fine-tuning UI details, I find joy in pushing myself and delivering meaningful digital experiences. If you're looking for a frontend developer who brings both creativity and precision to the table — let's connect!
+          <p className="mb-3 px-4 text-sm leading-relaxed max-w-md">
+            After several years as a mechanical engineer, I decided to shift gears and pursue my passion for frontend development — a field where I can express my creative side through both code and design.
           </p>
-
+          <p className="mb-3 px-4 text-sm leading-relaxed max-w-md">
+            I'm eager to learn, adapt quickly, and thrive in agile environments. I'm open-minded, a clear communicator, and I embrace challenges head-on.
+          </p>
+          <p className="mb-4 px-4 text-sm leading-relaxed max-w-md">
+            If you're looking for a frontend developer who brings both creativity and precision to the table — let's connect!
+          </p>
 
           <a
             href="/files/Tibor_SZALONTAI_CV.pdf"
             download
-            className="bg-red-600 border-4 border-white text-white font-pixel text-lg px-6 py-2 rounded hover:bg-red-700 active:translate-y-[2px] transition-all duration-200 shadow-[4px_4px_0_#000]"
+            className="bg-green-600 text-white font-bold text-sm px-4 py-2 border-4 border-black rounded-full shadow-[4px_4px_0_0_black] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_black] transition-all"
           >
             📄 Downloadable CV
           </a>
@@ -80,7 +81,7 @@ export default function About() {
               <li>
                 <strong>FLOWELL KFT – Project Engineer (2018 – 2019):</strong>
                 <br />
-                Managed industrial instrumentation projects, coordinated implementation processes, and maintained quality standards. 
+                Managed industrial instrumentation projects, coordinated implementation processes, and maintained quality standards.
               </li>
             </ul>
           </section>

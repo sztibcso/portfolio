@@ -19,25 +19,41 @@ export default function Projects() {
   }, []);
 
   return (
-    <div
-      className="background-default items-center p-8 font-pixel text-white min-h-screen"
-      style={{ backgroundImage: "url('/backgrounds/undergroundDesktop.webp')" }}
-    >
+    <div className="background-default font-pixel text-white"
+      style={{ backgroundImage: "url('/backgrounds/undergroundDesktop.webp')" }}>
       <div className="flex flex-col items-center p-8 pt-20">
         <h2 className="text-4xl font-semibold">Projects</h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-6 mt-8 w-full">
-          {projects.map((project) => (
-            <FlippableCard
+        {/* Desktop layout: 6 columns, middle 2 empty */}
+        <div className="hidden md:grid grid-cols-6 gap-6 mt-8 w-full">
+          {projects.map((project, index) => (
+            <div
               key={project.id}
-              frontImage={project.frontImage}
-              description={project.description}
-              linkImage={project.linkImage}
-              linkUrl={project.linkUrl}
-            />
+              className={`col-span-1 ${index === 2 ? 'col-start-5' : ''}`}
+            >
+              <FlippableCard
+                frontImage={project.frontImage}
+                description={project.description}
+                linkImage={project.linkImage}
+                linkUrl={project.linkUrl}
+              />
+            </div>
           ))}
         </div>
 
+        {/* Mobile layout: 2x2 grid */}
+        <div className="md:hidden grid grid-cols-2 gap-4 mt-8 w-full">
+          {projects.map((project) => (
+            <div key={project.id} className="aspect-[2/3]">
+              <FlippableCard
+                frontImage={project.frontImage}
+                description={project.description}
+                linkImage={project.linkImage}
+                linkUrl={project.linkUrl}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

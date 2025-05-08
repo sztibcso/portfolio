@@ -7,8 +7,8 @@ export default function Secret() {
 
   return (
     <div
-      className="min-h-screen flex flex-col items-center justify-center font-pixel text-white text-center p-8 relative"
-      style={{ backgroundImage: "url('/backgrounds/undergroundDesktop.webp')" }}
+      className="background-default font-pixel text-white items-center text-center p-8 pt-20"
+      style={{ backgroundImage: "url('/backgrounds/secret.webp')" }}
     >
       <button
         onClick={() => navigate("/")}
@@ -16,19 +16,19 @@ export default function Secret() {
       >
         ⬅ Back to Home
       </button>
-
-      <h1 className="text-4xl md:text-5xl font-bold mb-6 drop-shadow-lg">
-        Uh-oh... You weren't supposed to click that.
-      </h1>
-      <div className="text-xl md:text-2xl max-w-xl mb-10 space-y-4">
-        <p>
-          But hey, since you're here... why not go all in and hire me as your next Frontend Developer?
-        </p>
-        <p>Thanks for stopping by.</p>
-        <div className="text-lg md:text-xl font-semibold">Tibor Szalontai</div>
-        <div className="text-sm">hired by</div>
-        <div className="text-2xl font-bold">You</div>
-      </div>
+        <h1 className="text-center max-w-full text-xl md:text-5xl lg:mx-56 mt-3 font-bold mb-6 drop-shadow-lg p-8">
+          Uh-oh... You weren't supposed to click that.
+        </h1>
+        <div className="text-xl md:text-2xl max-w-full lg:mx-56 mb-10 space-y-4 text-center">
+          <p>
+            But hey, since you're here... why not go all in and hire me as your next Frontend Developer?
+          </p>
+          <p>Thanks for stopping by.</p>
+          <div className="text-lg md:text-xl font-semibold">Tibor Szalontai</div>
+          <div className="text-sm">hired by</div>
+          <div className="text-2xl font-bold">You</div>
+        </div>
+      <DontClickButton/>
     </div>
   );
 }

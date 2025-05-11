@@ -24,7 +24,6 @@ export default function FullPageWrapper() {
         onLeave={(_, destination) => {
           setActiveSection(destination.index + 1);
         }}
-        normalScrollElements={".scrollable-about, .scrollable-cv"}
         render={({ fullpageApi }) => {
           fullpageApiRef.current = fullpageApi;
 

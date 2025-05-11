@@ -9,7 +9,7 @@ export default function About() {
         className="background-image"
       />
 
-      <div className="scrollable-cv relative z-10 flex flex-col md:flex-row w-full min-h-screen px-4 py-20 gap-8 bg-black/75 backdrop-blur-sm">
+      <div className="relative z-10 flex flex-col md:flex-row w-full min-h-screen px-4 py-20 gap-8 bg-black/75 backdrop-blur-sm">
 
         {/* Left side - fix block, with my photo and a little text */}
         <div className="md:w-1/3 w-full self-start flex flex-col items-center text-center md:sticky md:top-20">

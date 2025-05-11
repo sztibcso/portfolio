@@ -20,7 +20,7 @@ export default function Home() {
                 I'm Tibcsó
               </h1>
               <p className="text-lg leading-relaxed mb-6">
-                Developer, UX designer based in Hungary. I have many years of experience in Development and Engineering.
+                Frontend Developer based in Hungary. I have many years of experience in Development and Engineering.
                 I love good designs, humorous ideas, and crazy stuffs.
               </p>
               <p className="text-lg font-bold text-red-400 animate-pulse">

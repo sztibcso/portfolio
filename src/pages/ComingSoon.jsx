@@ -6,10 +6,13 @@ export default function ComingSoon() {
   const navigate = useNavigate();
 
   return (
-    <div
-      className="background-default font-pixel text-white"
-      style={{ backgroundImage: "url('/backgrounds/sorry.webp')" }}
-    >
+    <div className="background-default">
+      <img
+        src="/backgrounds/sorry.webp"
+        alt="Background"
+        className="background-image"
+      />
+      <div className="relative z-10">
     <button
       onClick={() => navigate("/")}
       className="absolute top-4 left-4 bg-blue-600 text-white font-bold text-sm px-4 py-2 border-4 border-black rounded-full shadow-[4px_4px_0_0_black] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_black] transition-all"
@@ -22,6 +25,7 @@ export default function ComingSoon() {
         className="items-center w-92 h-auto"
       />
       <DontClickButton />
+      </div>
     </div>
   );
 }

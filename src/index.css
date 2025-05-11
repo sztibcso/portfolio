@@ -17,21 +17,14 @@ code {
 }
 
 .background-default {
-  @apply h-screen w-full bg-no-repeat bg-fixed;
-  background-position: center bottom;
-  background-size: cover;
+  @apply relative w-screen h-screen overflow-hidden bg-black font-pixel text-white;
 }
 
-.background-home {
-  @apply h-screen w-full bg-no-repeat bg-fixed;
-  background-position: center bottom;
-  background-size: cover;
-  background-image: url('/backgrounds/homeDesktop.webp');
-  
-@media (max-width: 768px) {
-    background-image: url('/backgrounds/homeMobil.webp');
+
+.background-image {
+  @apply absolute bottom-0 left-1/2 -translate-x-1/2 h-full object-cover z-0;
 }
-}
+
 
 @keyframes fadeInUp {
   from {

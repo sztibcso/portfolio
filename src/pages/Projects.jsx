@@ -19,8 +19,12 @@ export default function Projects() {
   }, []);
 
   return (
-    <div className="background-default font-pixel text-white"
-      style={{ backgroundImage: "url('/backgrounds/undergroundDesktop.webp')" }}>
+    <div className="background-default">
+      <img
+        src="/backgrounds/undergroundDesktop.webp"
+        alt="Background" 
+        className="background-image"
+      />
       <div className="flex flex-col items-center p-8 pt-20">
         <h2 className="text-4xl font-semibold">Projects</h2>
 

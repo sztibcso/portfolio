@@ -2,7 +2,7 @@ import React from "react";
 
 export default function About() {
   return (
-    <div className="background-default">
+    <div className="background-default scrollable-about">
       <img
         src="/backgrounds/about.webp"
         alt="Background"
@@ -32,12 +32,11 @@ export default function About() {
           <p className="mb-4 px-4 text-sm leading-relaxed max-w-md">
             If you're looking for a frontend developer who brings both creativity and precision to the table — let's connect!
           </p>
-
         </div>
 
         {/* Right side - CV  */}
         <div className="md:w-2/3 w-full">
-          <div className=" w-full max-h-[70vh] overflow-y-auto  mb-5 pr-4 scroll-smooth">
+          <div className="scrollable-cv w-full max-h-[70vh] overflow-y-auto touch-auto overscroll-contain mb-5 pr-4 scroll-smooth">
             <section>
               <h3 className="text-xl font-semibold mb-2">IT Stack</h3>
               <p className="mb-1"><strong>Server side (Basic knowledge) & API:</strong> Java/Java EE, SpringBoot, Python, RESTful APIs</p>
@@ -91,7 +90,6 @@ export default function About() {
               <p className="mb-1"><strong>Hobbies:</strong> Proud father of two boys, Zen Bu Kan Kempo, Brazilian Jiu-Jitsu, former children’s coach</p>
               <p className="mb-1"><strong>Driver's License:</strong> Category B (since 2010)</p>
             </section>
-
           </div>
 
           <a
@@ -106,4 +104,3 @@ export default function About() {
     </div>
   );
 }
-

@@ -25,6 +25,10 @@ code {
   @apply absolute bottom-0 left-1/2 -translate-x-1/2 h-full object-cover z-0;
 }
 
+.scrollable-about {
+  overscroll-behavior: contain;
+  touch-action: auto;
+}
 
 @keyframes fadeInUp {
   from {

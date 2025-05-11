@@ -2,14 +2,14 @@ import React from "react";
 
 export default function About() {
   return (
-    <div className="background-default scrollable-about">
+    <div className="background-default">
       <img
         src="/backgrounds/about.webp"
         alt="Background"
         className="background-image"
       />
 
-      <div className="relative z-10 flex flex-col md:flex-row w-full min-h-screen px-4 py-20 gap-8 bg-black/75 backdrop-blur-sm">
+      <div className="scrollable-cv relative z-10 flex flex-col md:flex-row w-full min-h-screen px-4 py-20 gap-8 bg-black/75 backdrop-blur-sm">
 
         {/* Left side - fix block, with my photo and a little text */}
         <div className="md:w-1/3 w-full self-start flex flex-col items-center text-center md:sticky md:top-20">
@@ -36,7 +36,7 @@ export default function About() {
 
         {/* Right side - CV  */}
         <div className="md:w-2/3 w-full">
-          <div className="scrollable-cv w-full max-h-[70vh] overflow-y-auto touch-auto overscroll-contain mb-5 pr-4 scroll-smooth">
+          <div className="w-full max-h-[70vh] overflow-y-auto touch-auto overscroll-contain mb-5 pr-4 scroll-smooth">
             <section>
               <h3 className="text-xl font-semibold mb-2">IT Stack</h3>
               <p className="mb-1"><strong>Server side (Basic knowledge) & API:</strong> Java/Java EE, SpringBoot, Python, RESTful APIs</p>

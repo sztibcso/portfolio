@@ -1,6 +1,4 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import DontClickButton from "../components/DontClickButton";
 
 export default function Secret() {
   const navigate = useNavigate();

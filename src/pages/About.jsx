@@ -52,11 +52,6 @@ export default function About() {
               <h3 className="text-xl font-semibold mb-2">Professional Experience</h3>
               <ul className="list-disc list-inside space-y-4">
                 <li>
-                  <strong>Cision – Front-end Engineer II (2026. 04 – currently):</strong>
-                  <br />
-                  Built and improved the frontend of a scalable Customer Experience platform used by thousands of clients. Worked within a self-driven Data and Channel Management team to deliver reliable, well-tested, and maintainable frontend features using modern technologies. Collaborated with engineers across the frontend organization to improve the tech stack, maintain high code quality, and shape the future of the platform.
-                </li>
-                <li>
                   <strong>PILLÉR NONPROFIT KFT – Frontend Developer (2024 – currently):</strong>
                   <br />
                   Developed responsive web application frontends using Angular, including dynamic component creation and REST API integration. Worked closely with backend, DevOps, and product teams. Led accessibility improvements for NAV's complex systems (WCAG). Applied Clean Code principles and optimized frontend architecture for scalability.

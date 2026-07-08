@@ -6,7 +6,7 @@ import About from "./pages/About";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import DontClickButton from './components/DontClickButton';
-import CisionButton from './components/CisionButton';
+import TecnomatixButton from "./components/TecnomatixButton";
 // import Erp2uButton from './components/Erp2uButton';
 
 
@@ -41,7 +41,7 @@ export default function FullPageWrapper() {
       />
 
       <DontClickButton />
-      <CisionButton />
+      <TecnomatixButton />
       {/* <Erp2uButton /> */}
     </>
   );

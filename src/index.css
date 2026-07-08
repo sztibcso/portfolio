@@ -36,6 +36,22 @@ code {
   }
 }
 
+/* Tecnomatix: minden szövegméret +4px (0.25rem) */
+.font-vt .text-xs   { font-size: 1rem;     line-height: 1.5rem; }
+.font-vt .text-sm   { font-size: 1.125rem; line-height: 1.75rem; }
+.font-vt .text-base { font-size: 1.25rem;  line-height: 1.75rem; }
+.font-vt .text-lg   { font-size: 1.375rem; line-height: 2rem; }
+.font-vt .text-xl   { font-size: 1.5rem;   line-height: 2rem; }
+.font-vt .text-2xl  { font-size: 1.75rem;  line-height: 2.25rem; }
+.font-vt .text-3xl  { font-size: 2.125rem; line-height: 2.5rem; }
+.font-vt .text-5xl  { font-size: 3.25rem;  line-height: 1; }
+
+@media (min-width: 768px) {
+  .font-vt .md\:text-xl  { font-size: 1.5rem;  line-height: 2rem; }
+  .font-vt .md\:text-2xl { font-size: 1.75rem; line-height: 2.25rem; }
+  .font-vt .md\:text-5xl { font-size: 3.25rem; line-height: 1; }
+}
+
 @layer utilities {
   .animate-fadeInUp {
     animation: fadeInUp 0.6s ease-out forwards;

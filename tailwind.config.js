@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         pixel: ['"Silkscreen", sans-serif'],
+        vt: ['"VT323", monospace'],
       },
       screens: {
         sm: '768px',

@@ -41,7 +41,7 @@ export default function FullPageWrapper() {
       />
 
       <DontClickButton />
-      <TecnomatixButton />
+      {/* <TecnomatixButton /> */}
       {/* <Erp2uButton /> */}
     </>
   );

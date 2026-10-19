@@ -8,12 +8,13 @@ import { useSqlRunner } from "../hooks/useSqlRunner";
  * Controlled SQL editor; the page owns the text so gallery cards can fill it.
  * @param {{
  *   sql: string,
+ *   expectedErrorCode?: string,
  *   onSqlChange: (sql: string) => void,
  *   dbState: import("../db/client").DbStatus["state"],
  *   textareaRef: import("react").Ref<HTMLTextAreaElement>,
  * }} props
  */
-export default function SqlEditor({ sql, onSqlChange, dbState, textareaRef }) {
+export default function SqlEditor({ sql, expectedErrorCode, onSqlChange, dbState, textareaRef }) {
   const { result, isPending, run, clear } = useSqlRunner();
   const [isResetting, startReset] = useTransition();
   const [notice, setNotice] = useState("");
@@ -78,7 +79,7 @@ export default function SqlEditor({ sql, onSqlChange, dbState, textareaRef }) {
       <p aria-live="polite" className={notice ? "mt-3 font-mono text-sm md:text-base text-emerald-300" : "sr-only"}>
         {notice}
       </p>
-      <ResultView result={result} isPending={isPending} />
+      <ResultView result={result} isPending={isPending} expectedErrorCode={expectedErrorCode} />
     </div>
   );
 }

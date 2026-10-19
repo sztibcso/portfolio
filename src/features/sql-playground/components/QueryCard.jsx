@@ -7,7 +7,7 @@ import { useSqlRunner } from "../hooks/useSqlRunner";
  * @param {{
  *   query: import("../data/queries").GalleryQuery,
  *   dbState: import("../db/client").DbStatus["state"],
- *   onOpenInEditor: (sql: string) => void,
+ *   onOpenInEditor: (sql: string, expectedErrorCode?: string) => void,
  * }} props
  */
 export default function QueryCard({ query, dbState, onOpenInEditor }) {
@@ -38,7 +38,7 @@ export default function QueryCard({ query, dbState, onOpenInEditor }) {
         />
         <button
           type="button"
-          onClick={() => onOpenInEditor(query.sql)}
+          onClick={() => onOpenInEditor(query.sql, query.expectedErrorCode)}
           aria-label={`Open in editor: ${query.title}`}
           className="rounded-lg border-2 border-white/60 px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >

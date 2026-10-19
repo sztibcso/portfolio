@@ -24,12 +24,16 @@ export default function SqlPlayground() {
   const db = useDbStatus(diagramSettled);
   // Stable so ErDiagram does not re-render Mermaid on every page render.
   const handleDiagramSettled = useCallback(() => setDiagramSettled(true), []);
-  const [editorSql, setEditorSql] = useState(EDITOR_STARTER_SQL);
+  // The expected SQLSTATE travels with SQL opened from an error demo and is
+  // dropped as soon as the visitor edits the text.
+  const [editor, setEditor] = useState(
+    /** @type {{ sql: string, expectedErrorCode?: string }} */ ({ sql: EDITOR_STARTER_SQL })
+  );
   const editorRef = useRef(/** @type {HTMLTextAreaElement | null} */ (null));
 
-  /** @param {string} sql */
-  function openInEditor(sql) {
-    setEditorSql(sql);
+  /** @param {string} sql @param {string} [expectedErrorCode] */
+  function openInEditor(sql, expectedErrorCode) {
+    setEditor({ sql, expectedErrorCode });
     const editor = editorRef.current;
     if (!editor) return;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -78,7 +82,13 @@ export default function SqlPlayground() {
 
         <Section id="editor" title="Write your own SQL">
           <TryItYourself onOpenInEditor={openInEditor} />
-          <SqlEditor sql={editorSql} onSqlChange={setEditorSql} dbState={db.state} textareaRef={editorRef} />
+          <SqlEditor
+            sql={editor.sql}
+            expectedErrorCode={editor.expectedErrorCode}
+            onSqlChange={(sql) => setEditor({ sql })}
+            dbState={db.state}
+            textareaRef={editorRef}
+          />
         </Section>
 
         <Section id="schema" title="Full schema">

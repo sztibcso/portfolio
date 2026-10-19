@@ -1,7 +1,7 @@
 import { EXPERIMENTS } from "../data/content";
 
 /**
- * @param {{ onOpenInEditor: (sql: string) => void }} props
+ * @param {{ onOpenInEditor: (sql: string, expectedErrorCode?: string) => void }} props
  */
 export default function TryItYourself({ onOpenInEditor }) {
   return (
@@ -16,7 +16,7 @@ export default function TryItYourself({ onOpenInEditor }) {
             <p className="font-vt text-xl md:text-2xl leading-snug text-white/80">{experiment.description}</p>
             <button
               type="button"
-              onClick={() => onOpenInEditor(experiment.sql)}
+              onClick={() => onOpenInEditor(experiment.sql, experiment.expectedErrorCode)}
               aria-label={`Open in editor: ${experiment.title}`}
               className="mt-auto self-start rounded-lg border-2 border-white/60 px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >

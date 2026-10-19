@@ -4,12 +4,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@electric-sql/pglite": "0.5.10",
     "@fullpage/react-fullpage": "^0.1.48",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.9.0",
+    "mermaid": "^12.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
@@ -20,9 +22,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "prestart": "node scripts/copy-pglite.mjs",
     "start": "react-scripts start",
+    "prebuild": "node scripts/copy-pglite.mjs",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:sql": "node --test scripts/verify-sql-playground.mjs",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
@@ -47,6 +52,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.5.3"
   }
 }

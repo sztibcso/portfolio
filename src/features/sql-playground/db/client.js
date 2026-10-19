@@ -24,8 +24,13 @@ const TEXT_PARSERS = Object.freeze({
  */
 
 /**
- * @typedef {{ state: "idle" | "loading" | "ready" | "error", message?: string }} DbStatus
+ * `loadedBytes` / `totalBytes` are set while the binaries download.
+ * @typedef {{ state: "idle" | "loading" | "ready" | "error", message?: string, loadedBytes?: number, totalBytes?: number }} DbStatus
  */
+
+/** A download that receives no bytes for this long counts as failed. */
+const STALL_TIMEOUT_MS = 20_000;
+const PROGRESS_INTERVAL_MS = 100;
 
 /** @type {Promise<any> | null} */
 let dbPromise = null;
@@ -55,22 +60,105 @@ export function subscribeDbStatus(listener) {
   return () => listeners.delete(listener);
 }
 
-/** @param {string} file */
-async function download(file) {
-  const response = await fetch(PGLITE_BASE + file);
+/**
+ * @param {string} file
+ * @param {AbortSignal} signal
+ * @param {(bytes: number) => void} [onBytes]
+ * @returns {Promise<Response>}
+ */
+async function download(file, signal, onBytes) {
+  // Low priority so the page's own chunks (e.g. Mermaid) are not starved on slow links.
+  const response = await fetch(PGLITE_BASE + file, { signal, priority: "low" });
   if (!response.ok) throw new Error(`Could not download ${file} (HTTP ${response.status}).`);
-  return response;
+  if (!onBytes || !response.body) return response;
+  const counter = new TransformStream({
+    transform(chunk, controller) {
+      onBytes(chunk.byteLength);
+      controller.enqueue(chunk);
+    },
+  });
+  // Explicit type so compileStreaming works even if the host serves .wasm wrongly.
+  const type = file.endsWith(".wasm") ? "application/wasm" : "application/octet-stream";
+  return new Response(response.body.pipeThrough(counter), { headers: { "content-type": type } });
 }
 
-async function createDb() {
-  // PGlite's own artifact download never settles when a fetch fails, so the
-  // binaries are fetched here and handed over, letting failures reject.
-  const [{ PGlite }, pgliteWasmModule, initdbWasmModule, fsBundle] = await Promise.all([
-    import(/* webpackIgnore: true */ PGLITE_BASE + "index.js"),
-    WebAssembly.compileStreaming(download("pglite.wasm")),
-    WebAssembly.compileStreaming(download("initdb.wasm")),
-    download("pglite.data").then((response) => response.blob()),
-  ]);
+/**
+ * @typedef {{ PGlite: any, pgliteWasmModule: WebAssembly.Module, initdbWasmModule: WebAssembly.Module, fsBundle: Blob }} Artifacts
+ */
+
+/** Downloaded once and reused by resetDb(). @type {Promise<Artifacts> | null} */
+let artifactsPromise = null;
+
+/**
+ * PGlite's own artifact download never settles when a fetch fails, so the
+ * binaries are fetched here and handed over, letting failures reject.
+ * @param {(progress: { loadedBytes: number, totalBytes: number }) => void} onProgress
+ * @returns {Promise<Artifacts>}
+ */
+async function downloadArtifacts(onProgress) {
+  const controller = new AbortController();
+  let rejectStall = () => {};
+  const stalled = new Promise((_, reject) => {
+    rejectStall = reject;
+  });
+  let timer = 0;
+  const kick = () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      controller.abort();
+      rejectStall(new Error(`The download stalled: no data received for ${STALL_TIMEOUT_MS / 1000} seconds.`));
+    }, STALL_TIMEOUT_MS);
+  };
+
+  let loadedBytes = 0;
+  let totalBytes = 0;
+  let lastReport = 0;
+  /** @param {number} bytes */
+  const onBytes = (bytes) => {
+    kick();
+    loadedBytes += bytes;
+    const now = performance.now();
+    if (now - lastReport >= PROGRESS_INTERVAL_MS || loadedBytes >= totalBytes) {
+      lastReport = now;
+      onProgress({ loadedBytes, totalBytes });
+    }
+  };
+
+  kick();
+  try {
+    const manifest = await Promise.race([
+      download("manifest.json", controller.signal).then((response) => response.json()),
+      stalled,
+    ]);
+    totalBytes = Object.values(manifest.sizes).reduce((sum, size) => sum + size, 0);
+    onProgress({ loadedBytes, totalBytes });
+
+    // index.js cannot be byte-counted (native import), but it downloads in
+    // parallel with the binaries, so a stall there still trips the watchdog.
+    const [{ PGlite }, pgliteWasmModule, initdbWasmModule, fsBundle] = await Promise.race([
+      Promise.all([
+        import(/* webpackIgnore: true */ PGLITE_BASE + "index.js"),
+        WebAssembly.compileStreaming(download("pglite.wasm", controller.signal, onBytes)),
+        WebAssembly.compileStreaming(download("initdb.wasm", controller.signal, onBytes)),
+        download("pglite.data", controller.signal, onBytes).then((response) => response.blob()),
+      ]),
+      stalled,
+    ]);
+    return { PGlite, pgliteWasmModule, initdbWasmModule, fsBundle };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/** @param {(progress: { loadedBytes: number, totalBytes: number }) => void} onProgress */
+async function createDb(onProgress) {
+  if (!artifactsPromise) {
+    artifactsPromise = downloadArtifacts(onProgress).catch((error) => {
+      artifactsPromise = null;
+      throw error;
+    });
+  }
+  const { PGlite, pgliteWasmModule, initdbWasmModule, fsBundle } = await artifactsPromise;
   const db = await PGlite.create({
     pgliteWasmModule,
     initdbWasmModule,
@@ -90,7 +178,9 @@ async function createDb() {
  */
 export function loadDb() {
   if (!dbPromise) {
-    const attempt = createDb();
+    const attempt = createDb((progress) => {
+      if (dbPromise === attempt) setStatus({ state: "loading", ...progress });
+    });
     dbPromise = attempt;
     setStatus({ state: "loading" });
     // Ignore outcomes of an attempt that resetDb() has already replaced.

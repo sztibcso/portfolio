@@ -5,7 +5,12 @@ import { formatCell } from "../lib/resultFormat";
  */
 export default function ResultTable({ fields, rows }) {
   return (
-    <div className="overflow-x-auto max-h-[28rem] overflow-y-auto rounded-lg border-2 border-white/20">
+    <div
+      tabIndex={0}
+      role="region"
+      aria-label="Query result (scrollable)"
+      className="overflow-x-auto max-h-[28rem] overflow-y-auto rounded-lg border-2 border-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+    >
       <table className="min-w-full border-collapse font-mono text-sm md:text-base text-left">
         <thead className="sticky top-0 bg-neutral-900">
           <tr>

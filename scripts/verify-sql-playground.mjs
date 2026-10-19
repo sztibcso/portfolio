@@ -6,6 +6,7 @@ import { PGlite } from "@electric-sql/pglite";
 import { SCHEMA_SQL } from "../src/features/sql-playground/data/schema.js";
 import { SEED_SQL } from "../src/features/sql-playground/data/seed.js";
 import { GALLERY_QUERIES } from "../src/features/sql-playground/data/queries.js";
+import { EDITOR_STARTER_SQL, EXPERIMENTS } from "../src/features/sql-playground/data/content.js";
 
 async function seededDb() {
   const db = await PGlite.create();
@@ -24,8 +25,14 @@ test("gallery has 12 queries with unique ids", () => {
   assert.equal(new Set(GALLERY_QUERIES.map((q) => q.id)).size, 12);
 });
 
-for (const query of GALLERY_QUERIES) {
-  test(`gallery: ${query.title}`, async () => {
+const RUNNABLE = [
+  ...GALLERY_QUERIES.map((q) => ({ ...q, title: `gallery: ${q.title}` })),
+  ...EXPERIMENTS.map((e) => ({ ...e, title: `experiment: ${e.title}` })),
+  { title: "editor starter SQL", sql: EDITOR_STARTER_SQL },
+];
+
+for (const query of RUNNABLE) {
+  test(query.title, async () => {
     const db = await seededDb();
     try {
       if (query.expectedErrorCode) {

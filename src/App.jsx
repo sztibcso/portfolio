@@ -9,6 +9,8 @@ import Tecnomatix from "./pages/Tecnomatix";
 
 // Lazy-loaded so the PDF renderer is only downloaded on the CV pages
 const CvViewer = lazy(() => import("./pages/CvViewer"));
+// Lazy-loaded so Mermaid and the PGlite loader stay out of the main bundle
+const SqlPlayground = lazy(() => import("./pages/SqlPlayground"));
 
 export default function App() {
   return (
@@ -18,6 +20,7 @@ export default function App() {
           <Route path="/" element={<FullPageWrapper />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
           <Route path="/secret" element={<Secret />} />
+          <Route path="/sql-playground" element={<SqlPlayground />} />
           <Route
             path="/tecnomatix"
             element={

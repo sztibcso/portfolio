@@ -65,6 +65,8 @@ CREATE INDEX ON ticket (purchase_id);
 
 /** Mermaid source for the ER diagram, kept next to the DDL it mirrors. */
 export const ER_DIAGRAM = `erDiagram
+  accTitle: Ticketing database entity-relationship diagram
+  accDescr: A venue has many seats and hosts many events. Events and performers are linked many-to-many through event_performer. A customer makes purchases, a purchase contains tickets, and each ticket is for one event and one seat.
   venue ||--|{ seat : "has"
   venue ||--o{ event : "hosts"
   event ||--o{ event_performer : "features"
